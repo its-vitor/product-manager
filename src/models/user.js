@@ -4,14 +4,14 @@ import Errors from '../errors/errors';
 
 /**
  * ## Esquema da entidade Usuário
- * @property `username` trata-se do nome de usuário daquela respectiva conta.
+ * @property `name` trata-se do nome de usuário daquela respectiva conta.
  * @property `email` é o endereço de email do usuário.
  * @property `password` é a senha do usuário.
  * @property `role` é o cargo que o usuário exerce. (0: Estagiário, 1: Lojista, 2: Administrador, 3: Staff)
  * @property `company` é o ID da compania que o usuário pertence.
  */
 const user = new mongoose.Schema({
-    username: {
+    name: {
         type: String,
         required: true,
     },
