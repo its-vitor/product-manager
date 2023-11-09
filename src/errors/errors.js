@@ -6,9 +6,11 @@ class CustomError extends Error {
 }
 
 class EmailInvalid extends CustomError {}
+class ImageSizeError extends CustomError {}
 
 const Errors = {
     EmailInvalid,
+    ImageSizeError
 };
 
 export default Errors;

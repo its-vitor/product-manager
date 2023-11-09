@@ -37,9 +37,18 @@ const user = new mongoose.Schema({
         type: Buffer,
         required: false,
         default: null,
+        // validação se a imagem excede o tamanho de 10mb.
+        validate(value) {
+            if (value) {
+                if (value.length > 10 * 1024 * 1024) {
+                    throw new Errors.ImageSizeError('A foto do perfil não pode ser maior que 10MB.');
+                }
+            }
+        }
     },
 });
 
+// validação do email
 user.pre('save', function(next) {
     const isValid = String(this.email)
           .toLowerCase()
@@ -51,11 +60,13 @@ user.pre('save', function(next) {
     else throw new Errors.EmailInvalid("Endereço de email inválido.");
 });
 
+// criptografia da senha no banco de dados
 user.pre('save', function(next) {
     if (this.isModified('password')) this.password = bcrypt.hashSync(this.password, 10);
     next();
 });
 
+// verificação da senha
 user.methods.isValidPassword = function(password) {
     return bcrypt.compare(password, this.password);
 };
