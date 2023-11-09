@@ -33,6 +33,11 @@ const user = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         required: true,
     },
+    profilePicture: {
+        type: Buffer,
+        required: false,
+        default: null,
+    },
 });
 
 user.pre('save', function(next) {
