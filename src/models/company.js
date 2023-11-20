@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const company = mongoose.Schema({
+const Company = mongoose.Schema({
     cnpj: {
         type: String,
         required: true,
@@ -22,3 +22,5 @@ const company = mongoose.Schema({
         default: null,
     },
 });
+
+export default Company;

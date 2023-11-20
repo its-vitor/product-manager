@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
-import Errors from '../errors/errors';
+import Errors from '../errors/errors.js';
 
 /**
  * ## Esquema da entidade Usuário
@@ -10,7 +10,7 @@ import Errors from '../errors/errors';
  * @property `role` é o cargo que o usuário exerce. (0: Estagiário, 1: Lojista, 2: Administrador, 3: Staff)
  * @property `company` é o ID da compania que o usuário pertence.
  */
-const user = new mongoose.Schema({
+const User = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -31,7 +31,7 @@ const user = new mongoose.Schema({
     },
     company: {
         type: mongoose.Types.ObjectId,
-        required: true,
+        required: false,
     },
     profilePicture: {
         type: Buffer,
@@ -49,7 +49,7 @@ const user = new mongoose.Schema({
 });
 
 // validação do email
-user.pre('save', function(next) {
+User.pre('save', function(next) {
     const isValid = String(this.email)
           .toLowerCase()
           .match(
@@ -61,12 +61,14 @@ user.pre('save', function(next) {
 });
 
 // criptografia da senha no banco de dados
-user.pre('save', function(next) {
+User.pre('save', function(next) {
     if (this.isModified('password')) this.password = bcrypt.hashSync(this.password, 10);
     next();
 });
 
 // verificação da senha
-user.methods.isValidPassword = function(password) {
+User.methods.isValidPassword = function(password) {
     return bcrypt.compare(password, this.password);
 };
+
+export default User;

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const product = mongoose.Schema({
+const Product = mongoose.Schema({
     productId: {
         type: String,
         required: true,
@@ -17,13 +17,27 @@ const product = mongoose.Schema({
         type: String,
         required: true,
     },
+    manufacturer: {
+        type: mongoose.Types.ObjectId,
+        required: true,
+    },
     images: {
         type: [Buffer],
         required: false,
         default: []
     },
+    authorId: {
+        type: mongoose.Types.ObjectId,
+        required: true,
+    },
+    companyId: {
+        type: mongoose.Types.ObjectId,
+        required: true,
+    }
 });
 
-product.pre('save', function(next) {
+Product.pre('save', function(next) {
 
 });
+
+export default Product;

@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import sharp from 'sharp';
 
-const model = new mongoose.Schema({
+const Model = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -16,7 +16,7 @@ const model = new mongoose.Schema({
     },
 });
 
-model.pre('save', async function (next) {
+Model.pre('save', async function (next) {
 
     if (this.isModified('header')) {
         this.header = await sharp(this.header)

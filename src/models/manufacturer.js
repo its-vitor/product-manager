@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const manufacturer = mongoose.Schema({
+const Manufacturer = mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -14,3 +14,5 @@ const manufacturer = mongoose.Schema({
         required: false,
     },
 });
+
+export default Manufacturer;
