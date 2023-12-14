@@ -21,6 +21,11 @@ const companySchema = new mongoose.Schema({
         required: false,
         default: null,
     },
+    createdByAdmin: {
+        type: Boolean,
+        required: false,
+        default: false,
+    },
 });
 
 const Company = mongoose.model('Company', companySchema, 'companys')
